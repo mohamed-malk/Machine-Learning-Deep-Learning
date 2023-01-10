@@ -1,0 +1,117 @@
+﻿                                |>>>>>>>>>>>> First, select features which correspond with the target (LOGICALLY) <<<<<<<<<<<<| {1 : Step}
+____ _________________________________________________________________________________________________________________________________________________________
+                                                                                                                                                              |
+    @ AveWeeklyHours ? It is certain (or known) that the number of hours worked affects salary.                                                               |
+                       The salary is increased by increasing the number of hours                                                                              |
+                       >> Acceptable                                                                                                                          |
+              --------------------------------------                                                                                                          |
+    @ IQ ? IQ affects salary (indirectly).                                                                                                                    |
+           For example, a business manager gave two sales staff, one with a higher IQ than the other,                                                         |
+           a new product that is foreign to the market; To market it, give it and let's call it rewarding.                                                    |
+           It is believed that the employee with a higher IQ will find an innovative and effective way for                                                    |
+           the other to market it from the other with a lower IQ. He may also find an idea,                                                                   |
+           but it will certainly be less effective and may take longer than the first. Therefore, IQ certainly affects salary.                                |
+           >> Acceptable                                                                                                                                      |
+        --------------------------------------                                                                                                                |
+    @ Knowledge ? Defining knowledge is the information and skills that a person has acquired through experience or education;                                |
+                  Theoretical or practical understanding of the topic. In the previous example, suppose that the two employees                                |
+                  found the idea of marketing the product, but its application and the sale of the largest possible quantity of                               |
+                  the product depends on the employee’s ability to convince the customer of the product,                                                      |
+                  and this requires skills, let it be persuasion skills and others. Thus, the employee who was able to                                        |
+                  convince the largest number of customers will sell more. "He who sells more is better," and therefore                                       |
+                  receives a higher salary "or, say, a premium." Thus, knowledge affects the salary (indirectly).                                             |
+                  >> Acceptable                                                                                                                               |
+            --------------------------------------                                                                                                            |
+    @ YearsEdu ? It may affect your salary, it may not. Suppose that there are two people who graduated from the FCI.                                         |
+                 One of them was satisfied with his bachelor's degree, and the other continued his studies and obtained a doctorate,                          |
+                 and the salary of a doctorate is certainly higher. Another possibility is that if the two obtain a doctorate, one of                         |
+                 them obtained in a shorter number of years, it may not affect the salary "the same rank" (or the one who obtained it in                      |
+                 fewer years has a higher salary). And the probability that the number of years of his education is few and his rank is                       |
+                 high, like the football players. Also, his salary may be low.                                                                                |
+                 The number of years of education is a relative matter, some things must be taken into account                                                |
+                 >> Acceptable                                                                                                                                |
+            --------------------------------------                                                                                                            |
+    @ YearsExperience ? It will certainly affect the salary, for the salary of a recent graduate or a newcomer to working in a field is few,                  |
+                        who has a less chance of solving work tasks, unlike an employee who has been working in the profession for a long time                |
+                        who will be able to solve the tasks he “faced before” Faster. His salary will definitely be higher.                                   |
+                        >> Acceptable                                                                                                                         |
+            --------------------------------------                                                                                                            |
+    @ Age ? There is a relationship between age and salary. Young people have a greater ability to be productive and creative than those who are old.         |
+            Their salary will be relatively higher, while those with older age have more experience, it is possible that their salary will be higher          |
+            (now age does not determine the extent of a person’s experience!!).                                                                               |
+                  >> Acceptable                                                                                                                               |
+            --------------------------------------                                                                                                            |
+    @ NumSiblings ? There is no relation between the number of relatives and salary (work).                                                                   |
+                  >> Unacceptable                                                                                                                             |
+            --------------------------------------                                                                                                            |
+    @ BirthOrder ? There is no relation between birth order and salary (work).                                                                                |
+                  >> Unacceptable                                                                                                                             |
+            --------------------------------------                                                                                                            |
+    @ DadEdu ? There is no relation between the father's education and salary (work).                                                                         |
+                  >> Accepted                                                                                                                                 |
+            --------------------------------------                                                                                                            |
+    @ MomEdu ? There is no relation between the mother's education and salary (work).                                                                         |
+                  >> Unacceptable                                                                                                                             |
+______________________________________________________________________________________________________________________________________________________________|
+                                                                                                                                                              |
+The Selected Features :: [ AveWeeklyHours, IQ, Knowledge, YearsEdu, YearsExperience, Age ]                                                                    |
+______________________________________________________________________________________________________________________________________________________________|
+
+
+                                |>>>>>>>>>>>> Second, select features according to statistical measures <<<<<<<<<<<<|  {2 : Step}                                         
+____ _________________________________________________________________________________________________________________________________________________________
+                                                                                                                                                              |
+    # First Try ---------------->>>| {2.1 : Step}                                                                                                             |
+                                                                                                                                                              |
+              % 1 % Check on Autocorrelatin (using durbin_watson method) for Selected Features from {1 : Step}                                                |
+                                                                                                                                                              |
+                 Resulet are >> [ AveWeeklyHours --  IQ    --   Knowledge    --    YearsEdu -- YearsExperience -- Age ]                                       |
+                                [   0.1         --  0.0   --       0.1      --      0.0    --       0.2       -- 0.0  ]                                       |
+                                                                                                                                                              |
+                 So, Selected Features from {2.1%1 : Step} :: [ AveWeeklyHours, Knowledge, YearsExperience]                                                   |
+          ***************************************************************************************************************                                     |
+                                                                                                                                                              |
+              % 2 % Check on multicollinearity (using VIF method) for Selected Features from {2.1%1 : Step}                                                   |
+                                                                                                                                                              |
+                 Resulet are >>     VIF         variable                                                                                                      |
+                                   66.9        Intercept                                                                                                      |
+                                    1.0   AveWeeklyHours                                                                                                      |
+                                    1.0        Knowledge                                                                                                      |
+                                    1.0  YearsExperience                                                                                                      |
+                                                                                                                                                              |
+                 So, these Selected Features are the best independent variables                                                                               |
+          ***************************************************************************************************************                                     |
+          There are effective effects between knowledge and experience, where the impact of knowledge on the salary depends on the years of news, if a person |
+          has high knowledge and skills without experience (zero years experience), his salary will be like any disappearance or skills (will not affect)     |
+                                                                                                                                                              |
+        >>>>> <<<<< R-Square for the Linear Regression model depend on these features is '0.11352704026687066' >>>>> <<<<<                                    |
+                                                                                                                                                              |
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                     |
+                      vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv                                     |
+                                                                                                                                                              |
+        # Second Try ---------------->>>| {2.2 : Step}                                                                                                        |
+                                                                                                                                                              |
+              % 1 % Check on multicollinearity (using VIF method) for Selected Features from {1 : Step}                                                       |
+                                                                                                                                                              |
+                 Resulet are >>      VIF         variable                                                                                                     |
+                                   224.7        Intercept                                                                                                     |
+                                     1.0   AveWeeklyHours                                                                                                     |
+                                     1.6               IQ                                                                                                     |
+                                     1.6        Knowledge                                                                                                     |
+                                     2.0         YearsEdu                                                                                                     |
+                                     1.8  YearsExperience                                                                                                     |
+                                     1.8              Age                                                                                                     |
+                                                                                                                                                              |
+                 So, Selected Features from {2.2%1 : Step} :: [ AveWeeklyHours, IQ, Knowledge]                                                                |
+          ***************************************************************************************************************                                     |
+                                                                                                                                                              |
+              % 2 % Check on Autocorrelatin (using durbin_watson method) for Selected Features from {2.2%1 : Step}                                            |
+                                                                                                                                                              |
+                 Resulet are >> [ AveWeeklyHours --  IQ    --   Knowledge ]                                                                                   |
+                                [       0.1      --  0.0   --      0.1    ]                                                                                   |
+                                                                                                                                                              |
+                 So, Selected Features from {2.2%2 : Step} :: [ AveWeeklyHours, Knowledge]                                                                    |
+          ***************************************************************************************************************                                     |
+                                                                                                                                                              |
+        >>>>> <<<<< R-Square for the Linear Regression model depend on these features is '0.12275575695885388' >>>>> <<<<<                                    |
+______________________________________________________________________________________________________________________________________________________________|

@@ -1,0 +1,186 @@
+﻿Machine Learning Diploma Level 2 
+Lecture 4 - Documentation 
+ Mohamed Yasser Ali
+___________________________________
+
+Income, limit and rating have a highly linear relationship with the balance.
+
+Income ----> The higher the income, the higher the balance, and vice versa.
+
+Limit  ----> is the maximum amount that determines to save both of an organization and the customer, 
+             and it's determined by some features one of them is income if customer's income is high,
+             the limit is high {multicollinearity} and also the balance is increase.
+
+Rating ----> The higher the rating, the higher the balance, and vice versa, 
+             but also it is determined by income if customer's income is high, 
+             the limit is high {multicollinearity} and also the balance is increase.
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Statistical measures to confirm the description (Corr-Coef)
+______________________________________________________
+corr-coef |  Income  |  Limit   | Rating   | Balance  |
+----------|----------|----------|----------|----------|
+Income    | 1.000000 | 0.792088 | 0.791378 | 0.463656 |
+----------|----------|----------|----------|----------|
+Limit     | 0.792088 | 1.000000 | 0.996880 | 0.861697 |
+----------|----------|----------|----------|----------|
+Rating    | 0.791378 | 0.996880 | 1.000000 | 0.863625 |
+__________|__________|__________|__________|__________|
+
+                   ^
+According to these | must delete two features from these features 
+       
+@@@     Income is less related to the limit and the rating with the balance, and it is also considered 
+        that both the limit and the rating have the same relationship, so it is omitted
+
+@@@     Limit and Rating are the same things, one of them will be deleted. The Limit will be because it 
+        is relatively less related to the balance, and the Rating is calculated from the Limit, 
+        so if the Limit is high, the costumer rating will rise, so the limit is omitted
+
+#######>>>>>>>>>>>>>     Therefore, the rating will be preserved.
+
+@@@     According to https://www.valuepenguin.com/banking/average-savings-account-balance, Education effect on the balance.
+
+@@@     If the customer has more than Credit Card, he will have more than one balance and therefore his balance may be high (affects). 
+
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<Age> 
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+<- Percentage is the customer's balance percentage in relation to the age group to which he belongs.
+________________________________________________________________________________
+Balance >> |  0 : 499.75   | 499.75 : 999.5 | 999.5 : 1499.25 | 1499.25 : 1999 |
++++++++++++|+++++++++++++++|++++++++++++++++|+++++++++++++++++|++++++++++++++++|
+Age        |               |                |                 |                |
+-----------|---------------|----------------|-----------------|----------------|
+ 98 : ~79  |  16 (88.8%->) |   0 (0.0%->)   |    0 (0.0%->)   |   2 (11.1%->)  |
+-----------|---------------|----------------|-----------------|----------------|
+~79 : ~60  |  73 (100.0%)  |   0 (0.0%->)   |    0 (0.0%->)   |   0 (0.0%->)   |
+-----------|---------------|----------------|-----------------|----------------|
+~60 : ~41  |  66 (92.9%->) |   0 (0.0%->)   |    0 (0.0%->)   |   5 (7.0%->)   |
+-----------|---------------|----------------|-----------------|----------------|
+~41 :  23  |  54 (93.1%->) |   1 (1.7%->)   |   1 (1.07%->)   |   2 (3.4%->)   |
+___________|_______________|________________|_________________|________________|
+
+This indicates that age does not affect the balance sufficiently, as each age group has its balance, most of which are less than 500.
+
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<Gender> 
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+<- Percentage is the customer's balance percentage in relation to the gender to which he belongs.
+______________________________________________________________________________
+Balance >> |   0 : 499.75   | 499.75 : 999.5 | 999.5 : 1499.25 | 1499.25 : 1999 |
++++++++++++|++++++++++++++++|++++++++++++++++|+++++++++++++++++|++++++++++++++++|
+Gender     |                |                |                 |                |
+-----------|----------------|----------------|-----------------|----------------|
+Male       |  103 (52.8%->) |  55 (28.2%->)  |   31 (15.8%->)  |   6 (3.0%->)   |
+-----------|----------------|----------------|-----------------|----------------|
+Female     |  106 (51.7%)   |  67 (32.6%->)  |   29 (14.1%->)  |   3 (1.4%->)   |
+___________|________________|________________|_________________|________________|
+
+This indicates that Gender does not affect the balance sufficiently, as each gender has its balance, most of which are less than 500.
+
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<Student> 
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+<- The percentage is the ratio of the customer's balance to the category(student - not student) to which he belongs.
+_________________________________________________________________________________
+Balance >> |   0 : 499.75   | 499.75 : 999.5 | 999.5 : 1499.25 | 1499.25 : 1999 |
++++++++++++|++++++++++++++++|++++++++++++++++|+++++++++++++++++|++++++++++++++++|
+Is Student |                |                |                 |                |
+-----------|----------------|----------------|-----------------|----------------|
+Student    |  11 (27.5%->)  |  10 (25.0%->)  |   16 (40.0%->)  |   3 (7.5%->)   |
+-----------|----------------|----------------|-----------------|----------------|
+Not-student|  198 (55.0%->) |  112 (31.1%->) |   44 (12.2%->)  |   6 (1.6%->)   |
+___________|________________|________________|_________________|________________|
+
+This indicates that Student-Features affects the balance.
+     If the customer is not student, then by 51% his balance is less than 500. And by 86.1 his balance is less than 1000.
+     If the customer is student, We need to other features to predict his balance. Because the proportions are somewhat similar.
+
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<Married> 
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+<- The percentage is the ratio of the customer's balance to the category(Maaried - Single) to which he belongs.
+_________________________________________________________________________________
+Balance >> |   0 : 499.75   | 499.75 : 999.5 | 999.5 : 1499.25 | 1499.25 : 1999 |
++++++++++++|++++++++++++++++|++++++++++++++++|+++++++++++++++++|++++++++++++++++|
+Is Married |                |                |                 |                |
+-----------|----------------|----------------|-----------------|----------------|
+Married    | 129 (53.5%->)  |  74 (30.7%->)  |   34 (14.1%->)  |   4 (1.6%->)   |
+-----------|----------------|----------------|-----------------|----------------|
+Single     | 80 (50.3%->)   |  48 (30.1%->)  |   26 (16.3%->)  |   5 (3.1%->)   |
+___________|________________|________________|_________________|________________|
+
+This indicates that Married does not affect the balance sufficiently. Because the proportions are somewhat similar.
+
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<Ethnicity> 
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+<- The percentage is the ratio of the customer's balance to the category(Caucasian - Asian - African American) to which he belongs.
+_________________________________________________________________________________
+Balance >> |   0 : 499.75   | 499.75 : 999.5 | 999.5 : 1499.25 | 1499.25 : 1999 |
++++++++++++|++++++++++++++++|++++++++++++++++|+++++++++++++++++|++++++++++++++++|
+Ethnicity  |                |                |                 |                |
+-----------|----------------|----------------|-----------------|----------------|
+Caucasian  |  50 (50.5%->)  |  31 (31.1%->)  |   14 (14.1%->)  |   4 (4.0%->)   |
+-----------|----------------|----------------|-----------------|----------------|
+Asian      |  55 (53.9%->)  |  28 (27.4%->)  |   17 (16.6%->)  |   2 (1.9%->)   |
+-----------|----------------|----------------|-----------------|----------------|
+African    |                |                |                 |                |
+           | 104 (52.2%->)  |  63 (31.6%->)  |   29 (14.5%->)  |   3 (1.5%->)   |
+American   |                |                |                 |                |
+___________|________________|________________|_________________|________________|
+
+This indicates that Ethnicity does not affect the balance sufficiently. Because the proportions are somewhat similar.
+
+*********************************************************************************************************************************************************
+
+Features that I choose for this problem : 'Rating - Cards - Education - Student'
+
+According to p-value (OLS-Regression) < 0.05 
+
+Rating & Cards      :   0.015 (interactive-effect)
+Rating & Education  :   0.001 (interactive-effect)
+Rating & Student    :   0.269
+Cards & Education   :   0.964
+Cards & Student     :   0.705
+Education & Student :   0.278
+
+The Regression Model according to these features have >>
+   
+>> Coef :  [ 2.14202320e+00 -7.10207067e+00  4.89604945e-02  2.02725589e-02 -6.11625708e+00  3.61402965e+02]
+>> Intercept :  -319.92986202538424
+>> MSE :  48510.63143163618         R2-Score :  0.8082661037711674
+
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The best alpha for Lasso and Ridge Regression is '1'.
+    
+@@@@@@@ Lasso Regression Model
+
+>> Coef :  [ 2.14202320e+00 -7.10207067e+00  4.89604945e-02  2.02725589e-02  -6.11625708e+00  3.61402965e+02]
+>> Intercept :  -319.92986202538424
+>> MSE :  48919.929079777794           R2-Score :  0.8066483917257968
+
+
+@@@@@@@ Ridge Regression Model
+
+>> Coef :  [ 2.14202320e+00 -7.10207067e+00  4.89604945e-02  2.02725589e-02  -6.11625708e+00  3.61402965e+02]
+>> Intercept :  -319.92986202538424
+>> MSE :  48981.772333478635             R2-Score :  0.8064039618423343
+-----------------------------------------------------------------------------------------------------------------------

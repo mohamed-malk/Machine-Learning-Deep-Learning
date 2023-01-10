@@ -1,0 +1,72 @@
+﻿                                |>>>>>>>>>>>> First, select features which correspond with the target (LOGICALLY) <<<<<<<<<<<<| {1 : Step}
+____ _________________________________________________________________________________________________________________________________________________________
+                                                                                                                                                              |
+    @ PassengerId ? Just a numer (ID), doesn't express anything                                                                                               |
+                       >> Unacceptable                                                                                                                        |
+              --------------------------------------                                                                                                          |
+    @ Pclass ? It is possible that the degree of the traveler affects, it may be more secure                                                                  |
+           >> Acceptable                                                                                                                                      |
+        --------------------------------------                                                                                                                |
+    @ Name ?  Just a name doesn't affect me whether you can survive or not                                                                                    |
+                  >> Unacceptable                                                                                                                             |
+            --------------------------------------                                                                                                            |
+    @ Sex ? It can affect the man, as the man is more tolerant and strong than the woman                                                                      |
+                 >> Acceptable                                                                                                                                |
+            --------------------------------------                                                                                                            |
+    @ Age ? It can affect young people more endurance and strength than the elderly and children                                                              |
+                  >> Acceptable                                                                                                                               |
+            --------------------------------------                                                                                                            |
+    @ SibSp ? Close people can help survive                                                                                                                   |
+                  >> Acceptable                                                                                                                               |
+            --------------------------------------                                                                                                            |
+    @ Parch ? Close people can help survive                                                                                                                   |
+                  >> Acceptable                                                                                                                               |
+            --------------------------------------                                                                                                            |
+    @ Ticket ? Just a ticket, doesn't express anything                                                                                                        |
+                  >> Unaccepted                                                                                                                               |
+            --------------------------------------                                                                                                            |
+    @ Fare ? doesn't express anything                                                                                                                         |
+                  >> Unacceptable                                                                                                                             |
+            --------------------------------------                                                                                                            |
+    @ Cabin ? doesn't express anything                                                                                                                        |
+                  >> Unacceptable                                                                                                                             |
+            --------------------------------------                                                                                                            |
+    @ Embarked ? doesn't express anything                                                                                                                     |
+                  >> Unacceptable                                                                                                                             |                                                                                                                             |                                                                                                                         |
+______________________________________________________________________________________________________________________________________________________________|
+                                                                                                                                                              |
+The Selected Features :: [ Pclass, IQ, Sex, Age, SibSp, Parch ]                                                                                               |
+______________________________________________________________________________________________________________________________________________________________|
+
+
+                                |>>>>>>>>>>>> Second, select features according to statistical measures <<<<<<<<<<<<|  {2 : Step}                                         
+____ _________________________________________________________________________________________________________________________________________________________
+                                                                                                                                                              |
+              % 1 % Check on Autocorrelatin (using durbin_watson method) for Selected Features from {1 : Step}                                                |
+                                                                                                                                                              |
+                 Resulet are >> [ Pclass --  Sex   --   Age  --  SibSp  --  Parch ]                                                                           |
+                                [   0.2  --  0.7   --   0.3  --   1.7   --   1.6 ]                                                                            |
+                                                                                                                                                              |
+                 So, Selected Features from {2%1 : Step} :: [ Sex, Age, SibSp, Parch]                                                                         |
+          ***************************************************************************************************************                                     |
+                                                                                                                                                              |
+              % 2 % Check on multicollinearity (using VIF method) for Selected Features from {2%1 : Step}                                                     |
+                                                                                                                                                              |
+                 Resulet are >>       VIF   variable                                                                                                          |
+                                      9.6  Intercept                                                                                                          |
+                                      1.1        Sex                                                                                                          |
+                                      1.1        Age                                                                                                          |
+                                      1.2      SibSp                                                                                                          |
+                                      1.3      Parch                                                                                                          |
+                                                                                                                                                              |
+                 So, Selected Features from {2%2 : Step} :: [ Sex, Age, SibSp ]                                                                               |
+          ***************************************************************************************************************                                     |
+          There are interactive effect between Sex and Age, and between SibSp and Age, Where the P-value > 0.05 accortding to OLS are  >>                     |
+          {Sex - Age}       0.000                                                                                                                             |
+          {Sex - SibSp}     0.010                                                                                                                             |                       
+          {Age - SibSp}     0.476                                                                                                                             |
+                                                                                                                                                              |
+        >>>>> <<<<< R-Square for the Logistic Regression model depend on these features is '97.93233082706767' >>>>> <<<<<                                    |
+        >>>>> <<<<< Accuracy_Score for the Logistic Regression model depend on these features is '99.28229665071771' >>>>> <<<<<                              |
+                                                                                                                                                              |
+______________________________________________________________________________________________________________________________________________________________|
