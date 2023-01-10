@@ -1,3 +1,6 @@
+# Dataset Link: https://www.kaggle.com/datasets/abdalrahmanelnashar/credit-card-balance-prediction
+#_____________________________________________________________________________________________________
+
 # load libraries
 import seaborn as sns
 import statsmodels.api as sm
